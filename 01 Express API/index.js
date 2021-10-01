@@ -6,13 +6,13 @@ app.use(express.json());
 app.use(cors());
 
 const text = {
-  en: "This is sample text.\nThis is a second line.",
-  pl: "To jest przykładowy tekst.\nTo jest druga linia.",
+  en: "This is sample text. \nThis is a second line.",
+  pl: "To jest przykładowy tekst. \nTo jest druga linia.",
 };
 
 app.get("/text", (req, res) => {
   const locale = req.header("Accept-Language").substr(0, 2);
-  res.send({text: [locale]});
+  res.send({text: text[locale]});
 });
 
 app.post("/like", (req, res) => {
