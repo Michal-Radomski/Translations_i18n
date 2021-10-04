@@ -10,10 +10,13 @@
   </div>
   <div class="row">
     <div class="col-md12">
-      <h2>This text is translated in the frontend:</h2>
+      <!-- <h2>This text is translated in the frontend:</h2> -->
+      <h2>{{ "title" | translate }}</h2>
       <!-- <p>This is translated in the backend:</p> -->
       <p>{{ text }}</p>
-      <button class="btn btn-outline-primary">Like</button>
+      <button class="btn btn-outline-primary" (click)="click()">
+        {{ "like" | translate }}
+      </button>
     </div>
   </div>
 </main>

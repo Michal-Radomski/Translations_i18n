@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,11 @@ export class AppComponent {
   // title = 'angular-translations';
   text = '';
   lang = 'en';
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private translateService: TranslateService
+  ) {
+    this.translateService.setDefaultLang(this.lang);
     this.load();
   }
 
@@ -25,6 +30,14 @@ export class AppComponent {
   }
   change(lang: any): void {
     this.lang = lang;
+    this.translateService.use(this.lang);
     this.load();
+  }
+  click(): void {
+    this.http.post('http://localhost:8000/like', {}).subscribe((res: any) => {
+      this.translateService
+        .get(res.message)
+        .subscribe((text: any) => alert(text));
+    });
   }
 }
